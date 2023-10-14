@@ -1,0 +1,17 @@
+@keyframes rotate180 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+.logo-container {
+  position: absolute;
+  left: 400px;
+  top: -220px;
+  z-index: -100;
+    animation: rotate180 70s linear infinite;
+}
