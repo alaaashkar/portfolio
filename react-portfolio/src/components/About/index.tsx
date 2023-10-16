@@ -1,9 +1,10 @@
+import React from 'react';
 import './index.scss'
 import { AnimatedLetters } from "../AnimatedLetters";
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCss3, faGitAlt, faHtml5, faJsSquare, faReact } from '@fortawesome/free-brands-svg-icons';
-import { Audio } from 'react-loader-spinner'
+import { PacmanLoader } from 'react-spinners';
 
 export const About = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
@@ -24,7 +25,7 @@ export const About = () => {
             <AnimatedLetters
               strArray={['A', 'b', 'o', 'u', 't', ' ', 'm', 'e']}
               idx={15}
-              letterClass={'text-animate'} />
+              letterClass={letterClass} />
           </h1>
 
           <p>
@@ -71,10 +72,11 @@ export const About = () => {
             </div>
           </div>
         </div>
+      </div >
+
+      <div className='pacMan'>
+        <PacmanLoader color="#FFFF00" size={50} />
       </div>
-
-      <Audio  className="audioLoader" height='100' width="100" color="yellow" arialabel="loading" />
-
     </>
   )
 };
