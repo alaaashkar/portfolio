@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { AnimatedLetters } from '../AnimatedLetters';
 import { LogoComponent } from './Logo';
 import { PacmanLoader } from 'react-spinners';
+import 'animate.css';
 
 
 export const Home = () => {
@@ -53,7 +54,8 @@ export const Home = () => {
         </div>
         <LogoComponent />
       </div >
-      <div className='pacMan animate__animated animate__slideInRight'>
+
+      <div className='pacMan'>
         <PacmanLoader color="#FFFF00" size={50} />
       </div>
 

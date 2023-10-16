@@ -22,6 +22,8 @@ textarea {
   font-family: 'Helvetica Neue';
 }
 
+
+
 .pacMan {
   display: block;
   position: absolute;
@@ -34,4 +36,9 @@ textarea {
   height: 50px;
   animation: fadeOut 1s 1s;
   animation-fill-mode: forwards;
+}
+
+.animate__animated,
+.animate__slideInRight {
+  margin: 0 auto;
 }
