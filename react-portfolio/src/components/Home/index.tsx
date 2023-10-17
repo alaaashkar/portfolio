@@ -12,7 +12,7 @@ import 'animate.css';
 export const Home = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
   const nameArray = ['l', 'a', 'a']
-  const jobArray = ['W', 'e', 'b', ' ', 'd', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r']
+  const jobArray = ['W', 'e', 'b', ' ', 'd', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', '.']
 
 
   useEffect(() => {

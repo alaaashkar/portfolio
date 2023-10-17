@@ -51,6 +51,7 @@
       animation: pulse 1s;
       line-height: 26px;
 
+
       &:nth-of-type(1) {
         animation-delay: 1.1s;
       }
@@ -67,9 +68,10 @@
   }
 
   .contact-form {
+
     width: 100%;
     margin-top: 20%;
-    // background-color: ;
+    display: flex;
 
     ul {
       padding: 0;
@@ -86,19 +88,12 @@
         opacity: 0;
         animation: fadeInUp 2s 2s;
         animation-fill-mode: forwards;
-        clear: both;
-        
+
       }
 
-      li.half {
-        width: 49%;
-        margin-left: 2%;
-        float: left;
-        clear: none;
-
-        &:first-child {
-          margin-left: 0;
-        }
+      .name__email {
+        display: flex;
+        gap: 10px;
       }
     }
 
@@ -151,5 +146,68 @@
 
   }
 
+  .info-map {
+    position: absolute;
+    background-color: rgb(22, 22, 22);
+    top: 50px;
+    right: 30%;
+    z-index: 9999;
+    width: 267px;
+    padding: 20px;
+    color: #fff;
+    font-family: 'Halvetica';
+    font-size: 17px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeIn 1s 1.5s;
+    animation-fill-mode: forwards;
 
+    span {
+      font-size: 16px;
+      display: block;
+      color: #ffd700;
+    }
+  }
+
+  .map-wrap {
+
+    background: rgba(88, 88, 88, 0.1);
+    float: right;
+    width: 53%;
+    height: 100vh;
+
+    .leaflet-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      opacity: 0;
+      animation: backInRight 1s 1.2s;
+      animation-fill-mode: forwards;
+
+      .leaflet-marker-icon {
+        display: none;
+      }
+
+      .leaflet-marker-shadow {
+        display: none;
+      }
+    }
+  }
+
+  .leaflet-popup-content {
+    font-size: 12px;
+  }
+}
+
+@media (max-width:1200px) {
+  .map-wrap{
+    float: none !important  ;
+    width: 100% !important;
+    height: 400px !important;
+    margin: 0 !important;
+  }
+
+  .info-map{
+    display: none !important;
+  }
 }

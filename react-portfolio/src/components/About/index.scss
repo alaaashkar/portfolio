@@ -7,7 +7,7 @@
     width: 35%;
     vertical-align: middle;
     display: table-cell;
-    max-width: 90%;
+    max-height: 90%;
 
     h1 {
       font-size: 53px;
@@ -156,5 +156,15 @@
         transform: rotateX(90deg);
       }
     }
+  }
+}
+
+
+@media (max-width:1200px) {
+  .stage-cube-cont {
+    position: initial !important;
+    width: 100% !important;
+    height: 0%;
+    overflow: visible !important;
   }
 }

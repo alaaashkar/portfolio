@@ -1,92 +1,145 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatedLetters } from '../AnimatedLetters';
 import './index.scss';
 import { PacmanLoader } from 'react-spinners';
-import emailjs from '@emailjs/browser'
+import emailjs from '@emailjs/browser';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 export const Contact = () => {
-  const [letterClass, setLetterClass] = useState('text-animate')
-  const refForm = useRef<HTMLFormElement | null>(null)
+  const [letterClass, setLetterClass] = useState('text-animate');
+  const refForm = useRef<HTMLFormElement | null>(null);
+  const mapRef = useRef<L.Map | null>(null); // Specify the initial type as L.Map | null
 
   useEffect(() => {
     const timeId = setTimeout(() => {
-      setLetterClass('text-animate-hover')
+      setLetterClass('text-animate-hover');
     }, 3000);
 
-    return () => { clearTimeout(timeId) };
-  }, [])
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, []);
 
-  const handlerSendEmail = (e: FormEvent) => {
-    e.preventDefault()
+  const handlerSendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
 
     if (refForm.current) {
-      emailjs.sendForm(
-        'service_c30j59p',
-        'template_f55xabq',
-        refForm.current,
-        'rzdnIAcLrH1k8-RMx'
-      )
+      emailjs
+        .sendForm(
+          'service_c30j59p',
+          'template_f55xabq',
+          refForm.current,
+          'rzdnIAcLrH1k8-RMx'
+        )
         .then(
           () => {
-            alert('Message successfully sent!')
-            window.location.reload(); //refreshes the page 
+            alert('Message successfully sent!');
+            window.location.reload(); // Refreshes the page
           },
           () => {
-            alert('Failed to send the message, please try again!')
+            alert('Failed to send the message, please try again!');
           }
         );
     } else {
-      console.error("refForm is null");
+      console.error('refForm is null');
     }
-  }
+  };
+
+  useEffect(() => {
+    // Create the map only if it doesn't already exist
+    if (!mapRef.current) {
+      // Initialize the map
+      const map = L.map('map').setView([0, 0], 13); // Default view with a placeholder location (latitude 0, longitude 0) and zoom level
+
+      // Add a tile layer (you can choose any tile provider)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+      }).addTo(map);
+
+      // Use the Geolocation API to get the user's current position
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          // Set the map's view to the user's current location
+          map.setView([lat, lon], 13);
+
+          // Create a marker at the user's location
+          const marker = L.marker([lat, lon]).addTo(map);
+
+          // Create a popup for the marker with a message
+          marker.bindPopup('I live here :)').openPopup();
+        });
+
+        // Save the map instance in the ref
+        mapRef.current = map;
+      }
+    }
+  }, []);
+
   return (
     <>
-      <div className='container contact-page'>
-        <div className='text-zone'>
+      <div className="container contact-page">
+        <div className="text-zone">
           <h1>
             <AnimatedLetters
               letterClass={letterClass}
               strArray={['C', 'o', 'n', 't', 'a', 'c', 't', ' ', 'm', 'e']}
-              idx={15} />
+              idx={15}
+            />
           </h1>
 
           <p>
             I am interested in full-time opportunities ~ especially ambitious or
-            large projects. However, if you have other request or question,
-            dont hesitate to contact me using using below form either
+            large projects. However, if you have other requests or questions,
+            don't hesitate to contact me using the form below.
           </p>
 
-          <div className='contact-form'>
+          <div className="contact-form">
             <form ref={refForm} onSubmit={handlerSendEmail}>
               <ul>
-                <li className='half'>
-                  <input type="text" name='name' placeholder='Name' required />
-                </li>
+                <div className="name__email">
+                  <li className="half">
+                    <input type="text" name="name" placeholder="Name" required />
+                  </li>
 
-                <li className='half'>
-                  <input type="email" name='email' placeholder='Email' required />
-                </li>
+                  <li className="half">
+                    <input type="email" name="email" placeholder="Email" required />
+                  </li>
+                </div>
 
                 <li>
                   <input placeholder="Subject" type="text" name="subject" required />
                 </li>
 
                 <li>
-                  <textarea placeholder='Message' name='message' required></textarea >
+                  <textarea placeholder="Message" name="message" required></textarea>
                 </li>
 
                 <li>
-                  <input type="submit" className='flat-button' value="SEND" />
+                  <input type="submit" className="flat-button" value="SEND" />
                 </li>
               </ul>
             </form>
           </div>
         </div>
 
+        <div className="info-map">
+          Ala El Achkar, <br />
+          Turkey, <br />
+          Mithatpaşa Mh 19, 22000 <br />
+          Istanbul <br />
+          <span>elachkarala@gmail.com</span>
+        </div>
 
+        <div className="map-wrap">
+          <div className='leaflet-container' id="map" style={{ height: '100vh' }}></div>
+        </div>
       </div>
 
-      <div className='pacMan'>
+      <div className="pacMan">
         <PacmanLoader color="#FFFF00" size={50} />
       </div>
     </>
