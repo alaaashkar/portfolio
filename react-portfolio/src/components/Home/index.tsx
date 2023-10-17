@@ -26,7 +26,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className="container home-page">
+      <div className="container home-page no-scroll-page">
         <div className="text-zone">
           <h1>
             <span className={letterClass}>H</span >

@@ -4,7 +4,7 @@ import './index.scss';
 
 export const Layout = () => {
   return (
-    <div className='App'>
+    <div className='App' >
       <Sidebar />
 
       <div className='page'>
