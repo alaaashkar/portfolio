@@ -2,17 +2,14 @@ import { useEffect, useState } from 'react';
 import './index.scss';
 import { PacmanLoader } from 'react-spinners';
 import { AnimatedLetters } from '../AnimatedLetters';
-import portfolioData from '../../data/portfolio.json'
+import { DocumentData, collection, getDocs } from 'firebase/firestore/lite';
+import { db } from '../../firebase';
 
-interface DataType {
-  cover: string,
-  title: string,
-  description: string,
-  url: string
-}
+
 
 export const Portfolio = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
+  const [portfolio, setPortfolio] = useState<DocumentData[]>([])
 
   useEffect(() => {
     const timeId = setTimeout(() => {
@@ -22,18 +19,28 @@ export const Portfolio = () => {
     return () => { clearTimeout(timeId) };
   }, [])
 
-  const renderPortfolio = (portfolio: DataType[]) => {
+  useEffect(() => {
+    getPortfolio()
+  }, [])
+
+  const getPortfolio = async () => {
+    const querySnapshot = await getDocs(collection(db, 'portfolio'))
+    setPortfolio(querySnapshot.docs.map(doc => doc.data()))
+
+  }
+
+  const renderPortfolio = (portfolio: DocumentData[]) => {
     return (
       <div className='images-container'>
         {portfolio.map((item, idx) => (
           <div className='image-box' key={idx}>
             <img
-              src={item.cover}
+              src={item.image}
               alt={`Portfolio ${idx}`}
               className='portfolio-image'
             />
             <div className='content'>
-              <p className='title'>{item.title}</p>
+              <p className='title'>{item.name}</p>
               <h4 className='description'>{item.description}</h4>
               <button
                 className='btn'
@@ -59,7 +66,7 @@ export const Portfolio = () => {
         </h1>
 
         <div>
-          {renderPortfolio(portfolioData.portfolio)}
+          {renderPortfolio(portfolio)}
         </div>
       </div>
 
