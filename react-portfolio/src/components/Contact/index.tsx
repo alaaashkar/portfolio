@@ -3,6 +3,8 @@ import { AnimatedLetters } from '../AnimatedLetters';
 import './index.scss';
 import { PacmanLoader } from 'react-spinners';
 import emailjs from '@emailjs/browser';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -10,6 +12,14 @@ export const Contact = () => {
   const [letterClass, setLetterClass] = useState('text-animate');
   const refForm = useRef<HTMLFormElement | null>(null);
   const mapRef = useRef<L.Map | null>(null); // Specify the initial type as L.Map | null
+  const [smallScreen, setSmallScreen] = useState(false)
+
+
+  useEffect(() => {
+    if (window.innerWidth <= 700) {
+      setSmallScreen(true)
+    }
+  }, [smallScreen])
 
   useEffect(() => {
     const timeId = setTimeout(() => {
@@ -79,6 +89,10 @@ export const Contact = () => {
     }
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <div className="container contact-page">
@@ -136,6 +150,12 @@ export const Contact = () => {
 
         <div className="map-wrap">
           <div className='leaflet-container' id="map" style={{ height: '100vh' }}></div>
+          {smallScreen && (
+            <div className='scroll-up-container' onClick={scrollToTop}>
+              <FontAwesomeIcon className='scroll-up-icon' icon={faArrowUp} />
+              Scroll Back Up
+            </div>
+          )}
         </div>
       </div>
 

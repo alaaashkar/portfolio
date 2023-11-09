@@ -1,0 +1,16 @@
+{
+  "portfolio": [
+    {
+      "cover": "portfolio/todos2.png",
+      "title": "TODOS",
+      "description": "React, TSX, Bulma, SCSS,TransitionGroup,",
+      "url": "https://alaaashkar.github.io/react_todo-app-with-api/"
+    },
+    {
+      "cover": "portfolio/todos2.png",
+      "title": "TODOS",
+      "description": "React, TSX, Bulma, SCSS,TransitionGroup,",
+      "url": "https://alaaashkar.github.io/react_todo-app-with-api/"
+    }
+  ]
+}

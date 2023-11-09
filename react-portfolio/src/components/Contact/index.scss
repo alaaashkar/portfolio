@@ -175,6 +175,7 @@
     float: right;
     width: 53%;
     height: 100vh;
+    position: relative;
 
     .leaflet-container {
       width: 100%;
@@ -192,6 +193,19 @@
         display: none;
       }
     }
+
+    .scroll-up-container {
+      position: absolute;
+      z-index: 9999999;
+      top: 0;
+      right: 0;
+      font-size: 20px;
+      font-family: 'coolvetica';
+      font-weight: 200;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+    }
   }
 
   .leaflet-popup-content {
@@ -200,14 +214,14 @@
 }
 
 @media (max-width:1200px) {
-  .map-wrap{
-    float: none !important  ;
+  .map-wrap {
+    float: none !important;
     width: 100% !important;
     height: 400px !important;
     margin: 0 !important;
   }
 
-  .info-map{
+  .info-map {
     display: none !important;
   }
 }
