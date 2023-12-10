@@ -145,7 +145,7 @@ export const Contact = () => {
           Turkey, <br />
           Mithatpaşa Mh 19, 22000 <br />
           Istanbul <br />
-          <span>elachkarala@gmail.com</span>
+          <span>ala.elachkar.job@gmail.com</span>
         </div>
 
         <div className="map-wrap">

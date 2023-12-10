@@ -17,6 +17,18 @@ export const Home = () => {
 
     const storageRef = ref(storage, `portfolio/${image.name}`)
 
+    const savePortfolio = async (portfolio) => {
+      console.log(portfolio);
+
+      try {
+        await addDoc(collection(db, 'portfolio'), portfolio)
+        window.location.reload(false)
+      } catch (error) {
+        alert('Failed to add portfolio')
+      }
+    }
+
+
     uploadBytes(storageRef, image).then(
       (snapshot) => {
         getDownloadURL(snapshot.ref).then((downloadUrl) => {
@@ -46,22 +58,11 @@ export const Home = () => {
       }
     )
 
-    const savePortfolio = async (portfolio) => {
-      console.log(portfolio);
-
-      try {
-        await addDoc(collection(db, 'portfolio'), portfolio)
-        window.location.reload(false)
-      } catch (error) {
-        alert('Failed to add portfolio')
-      }
-    }
+    
   }
 
   return (
     <div className="dashboard">
-
-
       <form ref={form} onSubmit={submitPortfolio}>
         <p><input type="text" placeholder="Name" /></p>
         <p><textarea placeholder="Description" /></p>

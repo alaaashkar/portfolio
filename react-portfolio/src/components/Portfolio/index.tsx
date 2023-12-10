@@ -19,9 +19,6 @@ export const Portfolio = () => {
     return () => { clearTimeout(timeId) };
   }, [])
 
-  useEffect(() => {
-    getPortfolio()
-  }, [])
 
   const getPortfolio = async () => {
     const querySnapshot = await getDocs(collection(db, 'portfolio'))
@@ -29,10 +26,15 @@ export const Portfolio = () => {
 
   }
 
+  useEffect(() => {
+    getPortfolio()
+  }, [])
+
   const renderPortfolio = (portfolio: DocumentData[]) => {
+    const reversedPortfolio = [...portfolio].reverse()
     return (
       <div className='images-container'>
-        {portfolio.map((item, idx) => (
+        {reversedPortfolio.map((item, idx) => (
           <div className='image-box' key={idx}>
             <img
               src={item.image}
